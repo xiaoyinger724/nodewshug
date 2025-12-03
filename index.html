@@ -1,722 +1,190 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>守护雪山 — 保护高山与冰川</title>
+  <meta name="description" content="一个静态宣传页，呼吁公众与组织一起守护雪山、保护冰川与高山生态。包含行动指南、志愿与捐助入口。" />
+  <style>
+    :root{
+      --bg:#f6f7f8;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#0f6fff;
+      --glass: rgba(255,255,255,0.6);
+      --maxw:1100px;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,var(--bg),#eef2f6);color:#0b1224}
+    .wrap{max-width:var(--maxw);margin:36px auto;padding:20px}
+
+    header.hero{
+      position:relative;overflow:hidden;border-radius:14px;min-height:360px;display:flex;align-items:center
+    }
+    header.hero .bg{
+      position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop');background-size:cover;background-position:center;filter:brightness(0.55) saturate(0.85);
+    }
+    header.hero .content{position:relative;color:white;padding:48px;z-index:2}
+    header.hero h1{font-size:clamp(28px,4vw,44px);margin:0 0 8px}
+    header.hero p{margin:0 0 18px;color:rgba(255,255,255,0.9)}
+    .cta{display:inline-flex;gap:10px}
+    .btn{display:inline-block;padding:10px 16px;border-radius:10px;background:var(--card);color:var(--accent);text-decoration:none;font-weight:600}
+
+    main{margin-top:18px;display:grid;grid-template-columns:1fr;gap:18px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+    .card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 6px 20px rgba(12,20,36,0.06)}
+    h2{margin:0 0 10px}
+    p.lead{color:var(--muted);margin:0 0 12px}
+    ul{margin:8px 0 0;padding-left:18px;color:var(--muted)}
+
+    footer{margin-top:20px;text-align:center;color:var(--muted);font-size:14px}
+
+    /* action banner */
+    .banner{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px;border-radius:12px;background:linear-gradient(90deg,#fbfdff,#f3f7fb);border:1px solid rgba(15,111,255,0.06)}
+
+    /* responsive */
+    @media (max-width:720px){header.hero{min-height:260px}header.hero .content{padding:20px} .wrap{margin:18px}}
+
+    /* accessible focus */
+    a:focus{outline:3px solid rgba(15,111,255,0.12);outline-offset:3px}
+
+    /* print */
+    @media print{body{background:white} header.hero .bg{display:none} .btn{display:none}}
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+  <div class="wrap">
+    <header class="hero card" role="banner" aria-label="守护雪山">
+      <div class="bg" aria-hidden="true"></div>
+      <div class="content">
+        <h1>守护雪山 · 倾听冰川的声音</h1>
+        <p class="lead">雪山与冰川是地球的水库与气候调节器。我们需要共同参与，让它们留给未来的世代。</p>
+        <div class="cta">
+          <a class="btn" href="#take-action">加入行动</a>
+          <a class="btn" href="#learn">了解更多</a>
         </div>
+      </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
+    <main>
+      <section id="learn" class="card" aria-labelledby="about-title">
+        <h2 id="about-title">为何要守护雪山？</h2>
+        <p class="lead">高山冰川影响着饮用水源、生物多样性与地区性气候。随着温度上升，冰川退缩带来一系列连锁问题。</p>
+        <div class="grid" style="margin-top:12px">
+          <div>
+            <h3>生态价值</h3>
+            <ul>
+              <li>为高山特有物种提供栖息地</li>
+              <li>维持河川年际径流与淡水供给</li>
+            </ul>
+          </div>
+          <div>
+            <h3>人类影响</h3>
+            <ul>
+              <li>冰川融化加剧洪水与泥石流风险</li>
+              <li>水资源短缺会影响农业与民生</li>
+            </ul>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
+      <section id="threats" class="card" aria-labelledby="threats-title">
+        <h2 id="threats-title">当前压力与威胁</h2>
+        <div class="grid" style="margin-top:12px">
+          <div>
+            <h3>气候变暖</h3>
+            <p class="lead">全球气候变暖是主要驱动，导致冰雪覆盖减小与冰川退缩。</p>
+          </div>
+          <div>
+            <h3>过度开发</h3>
+            <p class="lead">无序旅游、矿业和道路建设会破坏脆弱高山生态。</p>
+          </div>
+          <div>
+            <h3>污染与垃圾</h3>
+            <p class="lead">登山垃圾与塑料污染会累积在高山环境中，难以分解。</p>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
+      <section id="take-action" class="card" aria-labelledby="action-title">
+        <h2 id="action-title">你可以做的事</h2>
+        <div class="grid" style="margin-top:12px">
+          <div>
+            <h3>减少碳足迹</h3>
+            <p class="lead">选择公共交通、减少能源浪费，支持清洁能源项目。</p>
+          </div>
+          <div>
+            <h3>低影响出行</h3>
+            <p class="lead">登山时遵守“无痕山林”原则，带走自己的垃圾。</p>
+          </div>
+          <div>
+            <h3>参与与支持</h3>
+            <p class="lead">加入志愿者活动、支持研究项目或负责任的保护组织。</p>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
-        </div>
-    </section>
+      <section class="card" aria-labelledby="help-title">
+        <h2 id="help-title">加入我们</h2>
+        <p class="lead">欢迎个人、社团与企业以不同方式参与。以下是常见的参与路径：</p>
+        <ul>
+          <li>志愿修复植被、清理垃圾、记录生态数据</li>
+          <li>支持科研：资助巡查、监测与长期观测</li>
+          <li>教育与宣传：在社区与学校开展环境教育</li>
+        </ul>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
+        <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
+          <a class="btn" href="mailto:info@protectsnow.org?subject=我想加入守护雪山" role="button">发送邮件加入</a>
+          <a class="btn" href="#contact" role="button">登记志愿</a>
         </div>
+      </section>
+
+      <section id="contact" class="card" aria-labelledby="contact-title">
+        <h2 id="contact-title">志愿登记 / 联系</h2>
+        <form onsubmit="handleSubmit(event)">
+          <label style="display:block;margin-bottom:8px">姓名<input id="name" required placeholder="你的名字" style="width:100%;padding:8px;margin-top:6px;border-radius:8px;border:1px solid #e6eef8" /></label>
+          <label style="display:block;margin-bottom:8px">邮箱<input id="email" type="email" required placeholder="联系邮箱" style="width:100%;padding:8px;margin-top:6px;border-radius:8px;border:1px solid #e6eef8" /></label>
+          <label style="display:block;margin-bottom:8px">留言<textarea id="msg" placeholder="简单介绍你想参与的方式" style="width:100%;min-height:90px;padding:8px;margin-top:6px;border-radius:8px;border:1px solid #e6eef8"></textarea></label>
+          <div style="display:flex;gap:10px">
+            <button type="submit" class="btn">提交登记</button>
+            <button type="button" class="btn" onclick="downloadInfo()">下载信息页</button>
+          </div>
+          <p id="form-feedback" style="color:var(--muted);margin-top:10px"></p>
+        </form>
+      </section>
+
+    </main>
+
+    <footer>
+      <p>© 2025 守护雪山 · 感谢每一位关注与参与的人。</p>
     </footer>
+  </div>
 
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
+  <script>
+    function handleSubmit(e){
+      e.preventDefault();
+      const name=document.getElementById('name').value.trim();
+      const email=document.getElementById('email').value.trim();
+      const msg=document.getElementById('msg').value.trim();
+      // 简单前端反馈（示范用）；真实项目请提交到服务器
+      document.getElementById('form-feedback').textContent='感谢，已记录：' + name + '，我们会尽快联系你。';
+      // 清空表单
+      e.target.reset();
+    }
 
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
-        }
-
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
+    function downloadInfo(){
+      const html = document.documentElement.outerHTML;
+      const blob = new Blob([html], {type: 'text/html'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'protect-snow-mountains.html';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+  </script>
 </body>
-
 </html>
